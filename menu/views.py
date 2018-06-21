@@ -10,8 +10,8 @@ from .forms import *
 def menu_list(request):
     """This will bring menus not expired"""
     all_menus = Menu.objects.prefetch_related(
-            'items'
-        ).filter(
+        'items'
+    ).filter(
         Q(expiration_date__gte=timezone.now()) | Q(expiration_date=None)
     ).order_by(
         'expiration_date'
@@ -48,7 +48,9 @@ def create_new_menu(request):
             return redirect('menu_detail', pk=menu.pk)
     else:
         form = MenuForm()
-    return render(request, 'menu/menu_edit.html', {'form': form})
+    return render(request, 'menu/menu_edit.html', {
+        'form': form,
+    })
 
 
 def edit_menu(request, pk):
