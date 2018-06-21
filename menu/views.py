@@ -14,7 +14,7 @@ def menu_list(request):
     ).filter(
         Q(expiration_date__gte=timezone.now()) | Q(expiration_date=None)
     ).order_by(
-        'expiration_date'
+        '-expiration_date'
     )
     return render(request, 'menu/list_all_current_menus.html', {'menus': all_menus})
 
@@ -42,9 +42,12 @@ def create_new_menu(request):
     if request.method == "POST":
         form = MenuForm(request.POST)
         if form.is_valid():
+            # import pdb;pdb.set_trace()
             menu = form.save(commit=False)
             menu.created_date = timezone.now()
             menu.save()
+            # Now, save the many-to-many data for the form.
+            form.save_m2m()
             return redirect('menu_detail', pk=menu.pk)
     else:
         form = MenuForm()
