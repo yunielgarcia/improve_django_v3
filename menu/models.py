@@ -4,7 +4,7 @@ from django.utils import timezone
 
 class Menu(models.Model):
     season = models.CharField(max_length=20)
-    items = models.ManyToManyField('Item', related_name='items')
+    items = models.ManyToManyField('Item', related_name='menu')
     created_date = models.DateTimeField(
         default=timezone.now)
     expiration_date = models.DateTimeField(
@@ -21,7 +21,7 @@ class Item(models.Model):
     created_date = models.DateTimeField(
         default=timezone.now)
     standard = models.BooleanField(default=False)
-    ingredients = models.ManyToManyField('Ingredient')
+    ingredients = models.ManyToManyField('Ingredient', related_name='items')
 
     def __str__(self):
         return self.name

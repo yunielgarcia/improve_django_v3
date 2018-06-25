@@ -7,7 +7,7 @@ from .forms import *
 
 
 def menu_list(request):
-    """This will bring menus not expired"""
+    """This will bring menu not expired"""
     all_menus = Menu.objects.prefetch_related(
         'items'
     ).filter(
