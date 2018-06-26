@@ -100,8 +100,4 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
-DEBUG_TOOLBAR_PATCH_SETTINGS = False
-
-DEBUG_TOOLBAR_CONFIG = {
-    'SHOW_TOOLBAR_CALLBACK': lambda x: True
-}
+INTERNAL_IPS = ['127.0.0.1']

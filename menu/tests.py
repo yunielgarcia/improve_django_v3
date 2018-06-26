@@ -86,8 +86,8 @@ class MenuViewsTests(TestCase):
     def test_menu_list_view(self):
         resp = self.client.get(reverse('menu_list'))
         self.assertEqual(resp.status_code, 200)
-        self.assertIn(self.menu1, resp.context['menu'])
-        self.assertIn(self.menu2, resp.context['menu'])
+        self.assertIn(self.menu1, resp.context['menus'])
+        self.assertIn(self.menu2, resp.context['menus'])
         self.assertTemplateUsed(resp, 'menu/list_all_current_menus.html')
         self.assertContains(resp, self.menu1.season)
 
